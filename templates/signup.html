@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+<script>
+    $("#id_username").change((el) => {
+        console.log(el.target);
+        const username = $(el.target).val();
+
+        $.ajax({
+            url: '/ajax/validate-username/',
+            data: {
+                'username': username
+            },
+            dataType: 'json',
+            success: data => {
+                if (data.is_present) {
+                    alert('A user with this username already exist.');
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>Simple Ajax Django Example</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+</form>
+{% endblock %}
