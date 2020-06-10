@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from simple_ajax_app import urls as simple_ajax_urls
+from simple_ajax_app_v2 import urls as simple_ajax_urls_v2
+from simple_ajax_app_v3 import urls as simple_ajax_urls_v3
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(simple_ajax_urls))
+    path('', include(simple_ajax_urls)),
+    path('', include(simple_ajax_urls_v2)),
+    path('', include(simple_ajax_urls_v3))
 ]

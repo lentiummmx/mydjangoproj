@@ -2,12 +2,18 @@
 
 {% block javascript %}
 <script>
+    console.log(window.location.pathname.split(/(V[2,3])/g));
     $("#id_username").change((el) => {
         console.log(el.target);
         const username = $(el.target).val();
+        const pathNameSplit = window.location.pathname.split(/(V[2,3])/g);
+        let version = '';
+        if (pathNameSplit.length > 1) {
+            version = pathNameSplit[1];
+        }
 
         $.ajax({
-            url: '/ajax/validate-username/',
+            url: `/ajax${version}/validate-username/`,
             data: {
                 'username': username
             },
